@@ -1,0 +1,28 @@
+# Archivos generados por Android Studio
+/.idea/
+/.gradle/
+/build/
+
+# Archivos de configuración de Android Studio
+local.properties
+
+# Archivos de dependencias
+/.maven/
+
+# Archivos temporales
+*.iml
+*.log
+*.apk
+*.ap_
+//*.hprof
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de la IDE
+.vscode/
+
+# Configuración de gradle
+gradle-wrapper.jar
+gradle-wrapper.properties
