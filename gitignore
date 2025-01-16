@@ -1,28 +1,44 @@
-# Archivos generados por Android Studio
-/.idea/
-/.gradle/
-/build/
+# Node.js dependencies
+node_modules/
 
-# Archivos de configuración de Android Studio
-local.properties
+# Environment variables
+.env
 
-# Archivos de dependencias
-/.maven/
-
-# Archivos temporales
-*.iml
+# Logs
+logs/
 *.log
-*.apk
-*.ap_
-//*.hprof
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Archivos de sistema operativo
+# OS-specific files
 .DS_Store
 Thumbs.db
 
-# Archivos de configuración de la IDE
+# IDE/Editor files
 .vscode/
+.idea/
+*.swp
 
-# Configuración de gradle
-gradle-wrapper.jar
-gradle-wrapper.properties
+# Build output (si estás usando un bundler o framework que genera archivos compilados)
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test coverage
+coverage/
+
+# Dependency directories for front-end frameworks
+bower_components/
+
+# Optional: si estás usando Docker
+docker-compose.override.yml
+
+# Optional: si usas PM2
+pm2-log.json
+pm2.pid
+
