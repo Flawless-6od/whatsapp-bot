@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
@@ -55,7 +57,7 @@ client.on('message', (message) => {
     // Si el usuario no tiene estado, es su primera interacción, mostramos el menú principal
     if (!userState) {
         showMainMenu(userId, message);
-        return;
+        return; // Detener el flujo aquí
     }
 
     // Si el usuario ya está interactuando, seguimos con la lógica normal

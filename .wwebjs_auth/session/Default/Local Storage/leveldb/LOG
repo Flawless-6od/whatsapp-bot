@@ -1,3 +1,2 @@
-2025/01/16-02:07:42.850 287c Reusing MANIFEST C:\Users\Flawl\OneDrive\Escritorio\whats-bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/01/16-02:07:42.851 287c Recovering log #3
-2025/01/16-02:07:42.851 287c Reusing old log C:\Users\Flawl\OneDrive\Escritorio\whats-bot\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2025/01/16-23:59:35.082 1208 Creating DB C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Local Storage\leveldb since it was missing.
+2025/01/16-23:59:35.098 1208 Reusing MANIFEST C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
