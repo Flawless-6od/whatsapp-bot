@@ -22,7 +22,10 @@ const userStates = {};
 
 // Función para mostrar el menú principal
 const showMainMenu = (userId, message) => {
-    userStates[userId] = 'main_menu';
+    userStates[userId] = {
+        state: 'main_menu',
+        messageCount: (userStates[userId]?.messageCount || 0) + 1,
+    };
     message.reply(
         `¡Hola! Bienvenido/a a *Visongrow*. Por favor, elige una de las siguientes opciones:\n\n` +
         `1️⃣ *Cursos*\n` +
@@ -35,87 +38,89 @@ const showMainMenu = (userId, message) => {
 };
 
 // Función para manejar mensajes desconocidos
-const handleUnknownMessage = (message) => {
-    message.reply(
-        `Lo siento, no entendí tu mensaje. Por favor selecciona una opción válida escribiendo el número correspondiente o escribe 'volver' para regresar al menú principal.`
-    );
+const handleUnknownMessage = (userId, message) => {
+    if (userStates[userId]?.messageCount >= 2) {
+        message.reply(
+            `Lo siento, no entendí tu mensaje. Por favor, selecciona una opción válida escribiendo el número correspondiente o escribe 'volver' para regresar al menú principal.`
+        );
+    }
 };
 
 // Responder mensajes
 client.on('message', (message) => {
     const userId = message.from;
-    const userState = userStates[userId];
+    const userState = userStates[userId]?.state;
 
-    // Si el usuario escribe 'volver', lo redirigimos al menú principal
+    // Incrementar el contador de mensajes
+    if (!userStates[userId]) {
+        userStates[userId] = { state: null, messageCount: 0 };
+    }
+    userStates[userId].messageCount++;
+
+    // Si el usuario escribe "volver", regresarlo al menú principal
     if (message.body.toLowerCase() === 'volver') {
+        if (userStates[userId].messageCount >= 2) {
+            showMainMenu(userId, message);
+        }
+        return;
+    }
+
+    // Si el usuario es nuevo y no tiene un estado previo, mostrar el menú principal
+    if (!userState) {
         showMainMenu(userId, message);
         return;
     }
 
-    // Si el usuario no tiene estado, es su primera interacción, mostramos el menú principal
-    if (!userState) {
-        showMainMenu(userId, message);
-        return; // Detener el flujo aquí
-    }
-
-    // Si el usuario ya está interactuando, seguimos con la lógica normal
+    // Manejo de opciones del menú principal
     if (userState === 'main_menu') {
         switch (message.body) {
             case '1': // Cursos
-                userStates[userId] = 'cursos_menu';
+                userStates[userId].state = 'cursos_menu';
                 message.reply(
                     `📚 *Cursos Personalizados* 📚\n\nSelecciona el nivel que deseas explorar:\n` +
                     `1️⃣ Básico\n` +
-                    `2️⃣ Intermedio\n` +
-                    `3️⃣ Avanzado\n` +
-                    `4️⃣ Profesional\n\n` +
+                    `2️⃣ Avanzado\n` +
+                    `3️⃣ Profesional\n\n` +
                     `Escribe el número de la opción o "volver" para regresar al menú principal.`
                 );
                 break;
             case '2': // Copy Trading
-                userStates[userId] = 'copytrading_menu';
+                userStates[userId].state = 'copytrading_menu';
                 message.reply(
                     `🔹 *Copy Trading* 🔹\n\nEl Copy Trading permite replicar operaciones de traders experimentados.\n\n` +
                     `⭐ *Beneficios*:\n- Aprendizaje práctico\n- Diversificación de estrategias\n- Accesibilidad para principiantes\n\n` +
-                    `💳 *Inscríbete ya*: [https://pago-plataforma.com](https://pago-plataforma.com)\n\n` +
+                    `💳 *Inscríbete ya*: https://mpago.li/1AF9dAF\n\n` +
                     `Escribe "volver" para regresar al menú principal.`
                 );
                 break;
             case '3': // Finanzas Personales
-                userStates[userId] = 'finanzas_menu';
+                userStates[userId].state = 'finanzas_menu';
                 message.reply(
                     `💡 *Finanzas Personales* 💡\n\nAprende a gestionar tus ingresos y planificar tus objetivos financieros con nuestros expertos.\n\n` +
                     `Escribe "volver" para regresar al menú principal.`
                 );
                 break;
             case '4': // Grupo de WhatsApp
-                userStates[userId] = 'grupo_menu';
+                userStates[userId].state = 'grupo_menu';
                 message.reply(
-                    `🔗 *Únete a nuestro grupo gratuito de trading en WhatsApp* 🔗\n\nHaz clic aquí para unirte: [https://wa.me/grupo_ejemplo](https://wa.me/grupo_ejemplo)\n\n` +
+                    `🔗 *Únete a nuestro grupo gratuito de trading en WhatsApp* 🔗\n\nHaz clic aquí para unirte: https://chat.whatsapp.com/Kh4K80jMMZi06AkXImWNpU\n\n` +
                     `Escribe "volver" para regresar al menú principal.`
                 );
                 break;
-            case '5': // Agendar reunión
-                userStates[userId] = 'agendar_menu';
+            case '5': // Agendar reunión con un asesor
+                userStates[userId].state = 'agenda_menu';
                 message.reply(
-                    `📅 *Agenda una reunión con un asesor* 📅\n\nReserva tu espacio: [https://calendly.com/asesoramiento](https://calendly.com/asesoramiento)\n\n` +
+                    `📅 *Agendar una reunión con un asesor* 📅\n\n` +
+                    `Reserva tu sesión aquí: https://calendly.com/tuasesor\n\n` +
                     `Escribe "volver" para regresar al menú principal.`
                 );
                 break;
             default:
-                handleUnknownMessage(message);
-        }
-    } else if (userState === 'cursos_menu') {
-        if (['1', '2', '3', '4'].includes(message.body)) {
-            message.reply(
-                `💳 *Enlace para pago del curso seleccionado*: [https://pago-plataforma.com](https://pago-plataforma.com)\n\n` +
-                `🤝 ¡Gracias por confiar en nosotros! Nuestro equipo te asignará un asesor personalizado.\n\nEscribe "volver" para regresar al menú principal.`
-            );
-        } else {
-            handleUnknownMessage(message);
+                handleUnknownMessage(userId, message);
         }
     } else {
-        handleUnknownMessage(message);
+        // Manejar otros estados si aplica
+        handleUnknownMessage(userId, message);
     }
 });
 

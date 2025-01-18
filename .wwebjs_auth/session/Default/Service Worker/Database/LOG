@@ -1,2 +1,3 @@
-2025/01/16-23:59:37.360 3220 Creating DB C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Service Worker\Database since it was missing.
-2025/01/16-23:59:37.365 3220 Reusing MANIFEST C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001
+2025/01/17-17:11:25.874 5220 Reusing MANIFEST C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001
+2025/01/17-17:11:25.875 5220 Recovering log #3
+2025/01/17-17:11:25.875 5220 Reusing old log C:\Users\Flawl\OneDrive\Escritorio\test\whatsapp-bot\.wwebjs_auth\session\Default\Service Worker\Database/000003.log 
