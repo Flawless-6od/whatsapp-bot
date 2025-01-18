@@ -1,9 +1,23 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+const puppeteer = require('puppeteer');  // Importa Puppeteer
 
-// Inicializar cliente con autenticación local
+// Configura Puppeteer para usar Chromium en modo headless
+const puppeteerOptions = {
+    headless: true, // Usar en modo headless
+    args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox',
+        '--disable-gpu', 
+        '--window-size=1280x1024',
+        '--disable-software-rasterizer'
+    ]
+};
+
+// Inicializar cliente con autenticación local y configuración de Puppeteer
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: puppeteerOptions // Pasa las opciones de Puppeteer aquí
 });
 
 // Generar QR para iniciar sesión
